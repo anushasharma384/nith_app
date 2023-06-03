@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Animation/FadeAnimation.dart';
 
-void main() => runApp(
-  MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: HomePage(),
-  )
-);
 
 class HomePage extends StatelessWidget {
   @override 
@@ -72,10 +66,10 @@ class HomePage extends StatelessWidget {
                   ),
                   Positioned(
                     child: FadeAnimation(1.6,Container(
-                      margin: EdgeInsets.only(top: 50),
+                      margin: EdgeInsets.only(top: 60),
                       child: Center(
                         child: Text(
-                          "Login",
+                          "Login to NITH App",
                           style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
