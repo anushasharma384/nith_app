@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "315750768357",
+    "project_id": "nith-app-a1805",
+    "storage_bucket": "nith-app-a1805.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315750768357:android:9041130e2c0bbe2e92be0c",
+        "android_client_info": {
+          "package_name": "com.example.nith_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315750768357-g78cpv43bn3s785a9m3bc3f339s1ls5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT1jLVc6gSdmY-QhlhorAXadathGKNwrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315750768357-g78cpv43bn3s785a9m3bc3f339s1ls5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

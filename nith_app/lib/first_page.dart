@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:nith_app/login.dart';
+import 'package:nith_app/Phone_no.dart';
 import 'package:splashscreen/splashscreen.dart';
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
+Future<void> main() async {
   runApp(MyApp());
 }
 
@@ -11,9 +15,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Splash Screen',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
       home: Splash2(),
       debugShowCheckedModeBanner: false,
     );
@@ -27,12 +28,12 @@ class Splash2 extends StatelessWidget {
     return SplashScreen(
       gradientBackground: LinearGradient(
         colors: [
-          Color.fromRGBO(143, 148, 251, 1),
-          Color.fromRGBO(143, 148, 251, .6)
+          Color.fromRGBO(163, 167, 249, 1),
+          Color.fromRGBO(140, 144, 231, 0.6)
         ]
       ),
       seconds: 3,
-      navigateAfterSeconds: new HomePage(),
+      navigateAfterSeconds: new PhonePage(),
       title: new Text('NITH APP',textScaleFactor: 4,
       style: TextStyle(
         fontWeight: FontWeight.bold,
