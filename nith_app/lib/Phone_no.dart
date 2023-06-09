@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'Animation/FadeAnimation.dart';
 import 'otp.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -46,43 +45,40 @@ class _PhonePageState extends State<PhonePage> {
                     left: width * 0.14,
                     width: 80,
                     height: 200,
-                    child: FadeAnimation(
-                        1,
+                    child: 
+                        
                         Container(
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image:
                                       AssetImage('assets/Images/light-1.png'))),
-                        )),
+                        ),
                   ),
                   Positioned(
                       left: width * 0.34,
                       width: 80,
                       height: 135,
-                      child: FadeAnimation(
-                          1.3,
+                      child: 
                           Container(
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage(
                                         'assets/Images/light-2.png'))),
-                          ))),
+                          )),
                   Positioned(
                       right: width * 0.07,
                       top: height * 0.01,
                       width: 80,
                       height: 150,
-                      child: FadeAnimation(
-                          1.5,
+                      child: 
                           Container(
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                                     image:
                                         AssetImage('assets/Images/clock.png'))),
-                          ))),
+                          )),
                   Positioned(
-                    child: FadeAnimation(
-                        1.6,
+                    child: 
                         Container(
                           margin: EdgeInsets.only(top: 80),
                           child: Center(
@@ -94,21 +90,20 @@ class _PhonePageState extends State<PhonePage> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                        )),
+                        ),
                   )
                 ],
               ),
             ),
             SizedBox(height: 50),
-            FadeAnimation(
-                1.5,
+            
                 Text(
                   "We need to register your phone before getting started!",
                   style: TextStyle(
                     color: Color.fromRGBO(143, 148, 251, 1),
                     fontWeight: FontWeight.bold,
                   ),
-                )),
+                ),
             Padding(
               padding: EdgeInsets.all(30),
               child: Column(
@@ -170,8 +165,7 @@ class _PhonePageState extends State<PhonePage> {
                   SizedBox(
                     height: 30,
                   ),
-                  FadeAnimation(
-                      2,
+                  
                       SizedBox(
                         height: 50,
                         width: double.infinity,
@@ -192,17 +186,16 @@ class _PhonePageState extends State<PhonePage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10))),
                         ),
-                      )),
+                      ),
                   SizedBox(height: 50),
-                  FadeAnimation(
-                      1.5,
+                  
                       Text(
                         "Resend OTP",
                         style: TextStyle(
                           color: Color.fromRGBO(143, 148, 251, 1),
                           fontWeight: FontWeight.bold,
                         ),
-                      ))
+                      )
                 ],
               ),
             )
