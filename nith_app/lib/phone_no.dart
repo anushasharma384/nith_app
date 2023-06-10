@@ -1,44 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
-import 'phone_no.dart';
-import 'home_page.dart';
+import 'otp.dart';
 
-class OtpVerification extends StatefulWidget {
-  const OtpVerification({super.key});
+class PhonePage extends StatefulWidget {
+  const PhonePage({super.key});
 
   @override
-  State<OtpVerification> createState() => _OtpVerificationState();
+  State<PhonePage> createState() => _PhonePageState();
 }
 
-class _OtpVerificationState extends State<OtpVerification> {
+class _PhonePageState extends State<PhonePage> {
+  TextEditingController countrycode = TextEditingController();
+  var phone = "";
+
+  @override
+  void initState() {
+    countrycode.text = "+91";
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    // final defaultPinTheme = PinTheme(
-    //   width: 56,
-    //   height: 56,
-    //   textStyle: const TextStyle(
-    //       fontSize: 20,
-    //       color: Color.fromRGBO(30, 60, 87, 1),
-    //       fontWeight: FontWeight.w600),
-    //   decoration: BoxDecoration(
-    //     border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
-    //     borderRadius: BorderRadius.circular(20),
-    //   ),
-    // );
-
-    // final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-    //   border: Border.all(color: const Color.fromRGBO(114, 178, 238, 1)),
-    //   borderRadius: BorderRadius.circular(8),
-    // );
-
-    // final submittedPinTheme = defaultPinTheme.copyWith(
-    //   decoration: defaultPinTheme.decoration?.copyWith(
-    //     color: const Color.fromRGBO(234, 239, 243, 1),
-    //   ),
-    // );
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -87,7 +70,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                     margin: const EdgeInsets.only(top: 80),
                     child: const Center(
                       child: Text(
-                        "OTP Verification",
+                        "Phone Verification",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 40,
@@ -101,7 +84,7 @@ class _OtpVerificationState extends State<OtpVerification> {
           ),
           const SizedBox(height: 50),
           const Text(
-            "Enter the OTP sent to the registered mobile number!",
+            "We need to register your phone before getting started!",
             style: TextStyle(
               color: Color.fromRGBO(143, 148, 251, 1),
               fontWeight: FontWeight.bold,
@@ -111,13 +94,57 @@ class _OtpVerificationState extends State<OtpVerification> {
             padding: const EdgeInsets.all(30),
             child: Column(
               children: [
-                const Pinput(
-                  length: 6,
-                  pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-                  showCursor: true,
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color.fromRGBO(143, 148, 251, 0.3),
+                          blurRadius: 20.0,
+                        )
+                      ]),
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      SizedBox(
+                          width: 50,
+                          child: TextField(
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
+                            controller: countrycode,
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.grey),
+                          )),
+                      const SizedBox(
+                        width: 20,
+                        child: Text(
+                          "|",
+                          style: TextStyle(color: Colors.grey, fontSize: 35),
+                        ),
+                      ),
+                      Expanded(
+                          child: TextField(
+                        keyboardType: TextInputType.phone,
+                        onChanged: (value) {
+                          phone = value;
+                        },
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Phone Number",
+                            hintStyle:
+                                TextStyle(fontSize: 20, color: Colors.grey)),
+                        style:
+                            const TextStyle(color: Colors.grey, fontSize: 20),
+                      )),
+                    ],
+                  ),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 SizedBox(
                   height: 50,
@@ -125,32 +152,27 @@ class _OtpVerificationState extends State<OtpVerification> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                          builder: (context) => const OtpVerification()));
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(143, 148, 251, 1),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     child: const Text(
-                      "Verify the OTP",
+                      "Send OTP",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-                const SizedBox(height: 35),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const PhonePage()));
-                    },
-                    child: const Text(
-                      "Change Phone Number?",
-                      style: TextStyle(
-                        color: Color.fromRGBO(143, 148, 251, 1),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ))
+                const SizedBox(height: 50),
+                const Text(
+                  "Resend OTP",
+                  style: TextStyle(
+                    color: Color.fromRGBO(143, 148, 251, 1),
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
               ],
             ),
           )

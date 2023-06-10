@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:nith_app/Phone_no.dart';
-import 'package:flutter_splash_screen/flutter_splash_screen.dart';
+import 'package:nith_app/phone_no.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
   
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,25 +19,27 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
   
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3),
+    Timer(const Duration(seconds: 3),
           ()=>Navigator.pushReplacement(context,
                                         MaterialPageRoute(builder:
                                                           (context) => 
-                                                          PhonePage()
+                                                          const PhonePage()
                                                          )
                                        )
          );
@@ -47,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Container(
-      color: Color.fromRGBO(140, 144, 231, 0.6),
+      color: const Color.fromRGBO(140, 144, 231, 0.6),
       child: Column(
         children: [
           SizedBox(
@@ -57,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Container(
             width: width * 0.58,
             height: height * 0.4,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(image: AssetImage("assets/Images/nith-logo.png"), fit: BoxFit.fill)
             ),
           ),
@@ -65,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
             height: height * 0.1,
             width: double.infinity,
           ),
-          Center(
+          const Center(
             child: Text("NITH APP",
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 40),),
           )
