@@ -6,10 +6,12 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
   
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,13 +19,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
   
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -31,11 +35,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3),
+    Timer(const Duration(seconds: 3),
           ()=>Navigator.pushReplacement(context,
                                         MaterialPageRoute(builder:
                                                           (context) => 
-                                                          PhonePage()
+                                                          const PhonePage()
                                                          )
                                        )
          );
@@ -43,32 +47,32 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    return Container(
-      color: Color.fromRGBO(140, 144, 231, 0.6),
+    return Scaffold(
+      body: Container(
+      color: Color.fromRGBO(143, 148, 251, 1),
       child: Column(
         children: [
           SizedBox(
-            height: height * 0.2,
+            height: height * 0.25,
             width: double.infinity,
           ),
           Container(
-            width: width * 0.58,
-            height: height * 0.4,
-            decoration: BoxDecoration(
+            width: 300,
+            height: 300,
+            decoration: const BoxDecoration(
               image: DecorationImage(image: AssetImage("assets/Images/nith-logo.png"), fit: BoxFit.fill)
             ),
           ),
           SizedBox(
-            height: height * 0.1,
+            height: height * 0.05,
             width: double.infinity,
           ),
-          Center(
+          const Center(
             child: Text("NITH APP",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 40),),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 50),),
           )
         ],
       )
-    );
+    ));
   }
 }

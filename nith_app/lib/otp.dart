@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:pinput/pinput.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'Phone_no.dart';
+import 'phone_no.dart';
 import 'home_page.dart';
 
 class OtpVerification extends StatefulWidget {
@@ -19,159 +15,126 @@ class _OtpVerificationState extends State<OtpVerification> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final defaultPinTheme = PinTheme(
-      width: 56,
-      height: 56,
-      textStyle: TextStyle(
-          fontSize: 20,
-          color: Color.fromRGBO(30, 60, 87, 1),
-          fontWeight: FontWeight.w600),
-      decoration: BoxDecoration(
-        border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
-        borderRadius: BorderRadius.circular(20),
-      ),
-    );
-
-    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
-      borderRadius: BorderRadius.circular(8),
-    );
-
-    final submittedPinTheme = defaultPinTheme.copyWith(
-      decoration: defaultPinTheme.decoration?.copyWith(
-        color: const Color.fromRGBO(234, 239, 243, 1),
-      ),
-    );
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          children: [
-            Container(
-              height: height * 0.5,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/Images/background.png'),
-                    fit: BoxFit.fill),
-              ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    left: width * 0.14,
-                    width: 80,
-                    height: 200,
-                    child: 
-                        Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image:
-                                      AssetImage('assets/Images/light-1.png'))),
-                        ),
-                  ),
-                  Positioned(
-                      left: width * 0.34,
-                      width: 80,
-                      height: 135,
-                      child: 
-                          Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/Images/light-2.png'))),
-                          )),
-                  Positioned(
-                      right: width * 0.07,
-                      top: height * 0.01,
-                      width: 80,
-                      height: 150,
-                      child: 
-                          Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/Images/clock.png'))),
-                          )),
-                  Positioned(
-                    child: 
-                        Container(
-                          margin: EdgeInsets.only(top: 80),
-                          child: Center(
-                            child: Text(
-                              "OTP Verification",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                  )
-                ],
-              ),
+      body: SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            height: height * 0.5,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/Images/background.png'),
+                  fit: BoxFit.fill),
             ),
-            SizedBox(height: 50),
-            
-                Text(
-                  "Enter the OTP sent to the registered mobile number!",
-                  style: TextStyle(
-                    color: Color.fromRGBO(143, 148, 251, 1),
-                    fontWeight: FontWeight.bold,
+            child: Stack(
+              children: [
+                Positioned(
+                  left: width * 0.14,
+                  width: 80,
+                  height: 200,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/Images/light-1.png'))),
                   ),
                 ),
-            Padding(
-              padding: EdgeInsets.all(30),
-              child: Column(
-                children: [
-                  Pinput(
-                    length: 6,
-                    pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-                    showCursor: true,
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  
-                      SizedBox(
-                        height: 50,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => HomePage()));
-                          },
-                          child: Text(
-                            "Verify the OTP",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Color.fromRGBO(143, 148, 251, 1),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                        ),
-                      ),
-                  SizedBox(height: 35),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PhonePage()));
-                      },
+                Positioned(
+                    left: width * 0.34,
+                    width: 80,
+                    height: 135,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/Images/light-2.png'))),
+                    )),
+                Positioned(
+                    right: width * 0.07,
+                    top: height * 0.01,
+                    width: 80,
+                    height: 150,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/Images/clock.png'))),
+                    )),
+                Positioned(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 80),
+                    child: const Center(
                       child: Text(
-                        "Change Phone Number?",
+                        "OTP Verification",
                         style: TextStyle(
-                          color: Color.fromRGBO(143, 148, 251, 1),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ))
-                ],
-              ),
-            )
-          ],
-        ),
+                            color: Colors.white,
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          const SizedBox(height: 50),
+          const Text(
+            "Enter the OTP sent to the registered mobile number!",
+            style: TextStyle(
+              color: Color.fromRGBO(143, 148, 251, 1),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(30),
+            child: Column(
+              children: [
+                const Pinput(
+                  length: 6,
+                  pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+                  showCursor: true,
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const HomePage()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(143, 148, 251, 1),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    child: const Text(
+                      "Verify the OTP",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 35),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const PhonePage()));
+                    },
+                    child: const Text(
+                      "Change Phone Number?",
+                      style: TextStyle(
+                        color: Color.fromRGBO(143, 148, 251, 1),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ))
+              ],
+            ),
+          )
+        ],
       ),
-    );
+    ));
   }
 }
