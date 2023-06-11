@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'otp.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class PhonePage extends StatefulWidget {
   const PhonePage({super.key});
+  static String verify = "";
 
   @override
   State<PhonePage> createState() => _PhonePageState();
@@ -25,8 +26,9 @@ class _PhonePageState extends State<PhonePage> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -43,65 +45,57 @@ class _PhonePageState extends State<PhonePage> {
                     left: width * 0.14,
                     width: 80,
                     height: 200,
-                    child: 
-                        
-                        Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image:
-                                      AssetImage('assets/Images/light-1.png'))),
-                        ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/Images/light-1.png'))),
+                    ),
                   ),
                   Positioned(
                       left: width * 0.34,
                       width: 80,
                       height: 135,
-                      child: 
-                          Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/Images/light-2.png'))),
-                          )),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                    AssetImage('assets/Images/light-2.png'))),
+                      )),
                   Positioned(
                       right: width * 0.07,
                       top: height * 0.01,
                       width: 80,
                       height: 150,
-                      child: 
-                          Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/Images/clock.png'))),
-                          )),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/Images/clock.png'))),
+                      )),
                   Positioned(
-                    child: 
-                        Container(
-                          margin: EdgeInsets.only(top: 80),
-                          child: Center(
-                            child: Text(
-                              "Phone Verification",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                    child: Container(
+                      margin: EdgeInsets.only(top: 80),
+                      child: Center(
+                        child: Text(
+                          "Phone Verification",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold),
                         ),
+                      ),
+                    ),
                   )
                 ],
               ),
             ),
             SizedBox(height: 50),
-            
-                Text(
-                  "We need to register your phone before getting started!",
-                  style: TextStyle(
-                    color: Color.fromRGBO(143, 148, 251, 1),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+            Text(
+              "We need to register your phone before getting started!",
+              style: TextStyle(
+                color: Color.fromRGBO(143, 148, 251, 1),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Padding(
               padding: EdgeInsets.all(30),
               child: Column(
@@ -128,34 +122,28 @@ class _PhonePageState extends State<PhonePage> {
                               decoration:
                                   InputDecoration(border: InputBorder.none),
                               controller: countrycode,
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.grey),
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.grey),
                             )),
                         SizedBox(
                           width: 20,
                           child: Text(
                             "|",
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 35),
+                            style: TextStyle(color: Colors.grey, fontSize: 35),
                           ),
                         ),
                         Expanded(
                             child: TextField(
-                              keyboardType: TextInputType.phone,
+                          keyboardType: TextInputType.phone,
                           onChanged: (value) {
                             phone = value;
                           },
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Phone Number",
-                              hintStyle: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.grey)),
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 20),
+                              hintStyle:
+                                  TextStyle(fontSize: 20, color: Colors.grey)),
+                          style: TextStyle(color: Colors.grey, fontSize: 20),
                         )),
                       ],
                     ),
@@ -163,37 +151,43 @@ class _PhonePageState extends State<PhonePage> {
                   SizedBox(
                     height: 30,
                   ),
-                  
-                      SizedBox(
-                        height: 50,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
+                  SizedBox(
+                    height: 50,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        await FirebaseAuth.instance.verifyPhoneNumber(
+                          phoneNumber: '${countrycode.text + phone}',
+                          verificationCompleted:
+                              (PhoneAuthCredential credential) {},
+                          verificationFailed: (FirebaseAuthException e) {},
+                          codeSent: (String verificationId, int? resendToken) {
+                            PhonePage.verify = verificationId;
                             Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => OtpVerification()));
-
+                                builder: (context) => const OtpVerification()));
                           },
-                          child: Text(
-                            "Send OTP",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Color.fromRGBO(143, 148, 251, 1),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                        ),
-                      ),
-                  SizedBox(height: 50),
-                  
-                      Text(
-                        "Resend OTP",
+                          codeAutoRetrievalTimeout: (String verificationId) {},
+                        );
+                      },
+                      child: Text(
+                        "Send OTP",
                         style: TextStyle(
-                          color: Color.fromRGBO(143, 148, 251, 1),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          primary: Color.fromRGBO(143, 148, 251, 1),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                    ),
+                  ),
+                  SizedBox(height: 50),
+                  Text(
+                    "Resend OTP",
+                    style: TextStyle(
+                      color: Color.fromRGBO(143, 148, 251, 1),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
                 ],
               ),
             )
