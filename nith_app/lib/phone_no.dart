@@ -180,14 +180,7 @@ class _PhonePageState extends State<PhonePage> {
                               borderRadius: BorderRadius.circular(10))),
                     ),
                   ),
-                  SizedBox(height: 50),
-                  Text(
-                    "Resend OTP",
-                    style: TextStyle(
-                      color: Color.fromRGBO(143, 148, 251, 1),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                  SizedBox(height: 50)
                 ],
               ),
             )
